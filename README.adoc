@@ -102,22 +102,22 @@ endif::[]
 //------------------------------------ 
 == {assignment}
 
-{lastName}:: BRUEL
+{lastName}:: Begishev
 
-{firstName}:: Jean-Michel
+{firstName}:: Danis
 
-{group} #::
+{group} #:: BS17-DS-02
 
 [%interactive]
-- [X] {Enseignants}
+- [] {Enseignants}
 - [ ] 1
 - [ ] 2
 - [ ] 3
 - [ ] 4
-- [ ] Innopolis
+- [X] Innopolis
 
 //------------------------------------ 
-== {requirements}
+== {requirements
 
 ifdef::uk[]
 You'll need:
