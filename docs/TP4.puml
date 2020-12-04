@@ -1,0 +1,170 @@
+@startuml
+
+     class bank.Account {
+               - accountNumber : String
+               - credits : double
+               - debits : double
+               - nbCredits : int
+               - nbDebits : int
+               - owner : String
+               + Account()
+               + Account()
+               + balance()
+               + deposit()
+               + getAccountNumber()
+               + getOwner()
+               + print()
+               + setOwner()
+               + toString()
+               + withdraw()
+           }
+           class bank.BankAgency {
+               - accounts : ArrayList<Account>
+               - loc : String
+               - name : String
+               + BankAgency()
+               + addAccount()
+               + getAccount()
+               + getAccountsOf()
+               + getAgencyLoc()
+               + getAgencyName()
+               + getNbAccounts()
+               + print()
+               + removeAccount()
+               + toString()
+               - findAccount()
+           }
+
+         class application.AccesBankAgency {
+             {static} + getBankAgency()
+             {static} + saveAgenceBancaire()
+             - AccesBankAgency()
+         }
+ class application.actioncontext.ApplicationContextBankAgency {
+                 {static} - instance : ApplicationContextBankAgency
+                 - printStream : PrintStream
+                 - scanner : Scanner
+                 + close()
+                 + getBankAgency()
+                 {static} + getInstance()
+                 + getPrintStream()
+                 + getScanner()
+                 + setInputStream()
+                 - ApplicationContextBankAgency()
+             }
+             interface application.actioncontext.ApplicationContext {
+                 {abstract} + close()
+                 {abstract} + getPrintStream()
+                 {abstract} + getScanner()
+                 {abstract} + setInputStream()
+             }
+   application.actioncontext.ApplicationContextBankAgency .up.|> application.actioncontext.ApplicationContext
+   application.actioncontext.ApplicationContextBankAgency o-- bank.BankAgency : bankAgency
+
+ interface application.actionlist.ActionList {
+                 {abstract} + addAction()
+                 {abstract} + listOfActions()
+                 {abstract} + listTitle()
+                 {abstract} + removeAction()
+                 {abstract} + removeAction()
+                 {abstract} + size()
+             }
+             class application.actionlist.GenericActionList {
+                 - title : String
+                 - message : String
+                 - code : String
+                 - actionlist : ArrayList<Action<Context>>
+                 + GenericActionList()
+                 + actionCode()
+                 + actionMessage()
+                 + addAction()
+                 + execute()
+                 + listOfActions()
+                 + listTitle()
+                 + removeAction()
+                 + removeAction()
+                 + size()
+             }
+
+   application.actionlist.GenericActionList .up.|> application.actionlist.ActionList
+
+ interface application.action.Action {
+               {abstract} + actionCode()
+               {abstract} + actionMessage()
+               {abstract} + execute()
+           }
+           class application.action.ActionAccountsList {
+               - code : String
+               - message : String
+               + ActionAccountsList()
+               + actionCode()
+               + actionMessage()
+               + execute()
+           }
+           class application.action.ActionAddAccount {
+               - code : String
+               - message : String
+               + ActionAddAccount()
+               + actionCode()
+               + actionMessage()
+               + execute()
+           }
+           class application.action.ActionDeleteAccount {
+               - code : String
+               - message : String
+               + ActionDeleteAccount()
+               + actionCode()
+               + actionMessage()
+               + execute()
+           }
+           class application.action.ActionOwnerAccounts {
+              - code : String
+              - message : String
+              + ActionOwnerAccounts()
+              + actionCode()
+              + actionMessage()
+              + execute()
+              {static} - ownerAccounts()
+          }
+           class application.action.ActionDepositOnAccount {
+               - code : String
+               - message : String
+               + ActionDepositOnAccount()
+               + actionCode()
+               + actionMessage()
+               + execute()
+               {static} - depositOnAccount()
+           }
+           class application.action.ActionSeeAccountNumber {
+               - code : String
+               - message : String
+               + ActionSeeAccountNumber()
+               + actionCode()
+               + actionMessage()
+               + execute()
+           }
+           class application.action.ActionWithdrawFromAccount {
+               - code : String
+               - message : String
+               + ActionWithdrawFromAccount()
+               + actionCode()
+               + actionMessage()
+               + execute()
+               {static} - withdrawFromAccount()
+           }
+
+   application.action.ActionAccountsList .up.|> application.action.Action
+   application.action.ActionAddAccount .up.|> application.action.Action
+   application.action.ActionDeleteAccount .up.|> application.action.Action
+   application.action.ActionDepositOnAccount .up.|> application.action.Action
+   application.action.ActionSeeAccountNumber .up.|> application.action.Action
+   application.action.ActionWithdrawFromAccount .up.|> application.action.Action
+   application.action.ActionOwnerAccounts .up.|> application.action.Action
+
+
+   application.actionlist.ActionList ..|> application.action.Action : extends
+ right footer
+
+ endfooter
+
+ @enduml
